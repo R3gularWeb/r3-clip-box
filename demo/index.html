@@ -6,7 +6,14 @@
     body {
       background: #fafafa;
     }
+
+    r3-clip-box {
+      padding: 20px;
+    }
   </style>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=VT323&display=swap" rel="stylesheet"> 
 </head>
 <body>
   <div id="demo"></div>
@@ -18,9 +25,17 @@
     const title = 'Hello owc World!';
     render(
       html`
-        <r3-clip-box .title=${title}>
-          some more light-dom
+        <r3-clip-box size="small"></r3-clip-box>
+        <r3-clip-box
+          image="https://avatars.githubusercontent.com/u/86213026?s=200&v=4"
+        >
         </r3-clip-box>
+        <r3-clip-box text="ASUNA" size="big"></r3-clip-box>
+        <r3-clip-box text="ASUNA x" variant="square"></r3-clip-box>
+        <r3-clip-box
+          image="https://avatars.githubusercontent.com/u/86213026?s=200&v=4"
+          variant="square" size="big"
+        >
       `,
       document.querySelector('#demo')
     );
