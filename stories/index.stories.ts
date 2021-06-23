@@ -5,9 +5,10 @@ export default {
   title: 'R3ClipBox',
   component: 'r3-clip-box',
   argTypes: {
-    title: { control: 'text' },
-    counter: { control: 'number' },
-    textColor: { control: 'color' },
+    image: { control: 'image' },
+    size: { control: 'size' },
+    text: { control: 'color' },
+    variant: { control: 'variant' }
   },
 };
 
@@ -18,24 +19,26 @@ interface Story<T> {
 }
 
 interface ArgTypes {
-  title?: string;
-  counter?: number;
-  textColor?: string;
-  slot?: TemplateResult;
+  image?: string;
+  size?: string;
+  text?: string;
+  variant?: string;
 }
 
 const Template: Story<ArgTypes> = ({
-  title = 'Hello world',
-  counter = 5,
-  textColor,
-  slot,
+  image = '',
+  size = 'medium',
+  text = 'NA',
+  variant = 'solid',
 }: ArgTypes) => html`
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=VT323&display=swap" rel="stylesheet"> 
   <r3-clip-box
-    style="--r3-clip-box-text-color: ${textColor || 'black'}"
-    .title=${title}
-    .counter=${counter}
+    image="${image}"
+    size="${size}"
+    text="${text}"
+    variant="${variant}"
   >
-    ${slot}
   </r3-clip-box>
 `;
 
@@ -43,18 +46,32 @@ export const Regular = Template.bind({});
 
 export const CustomTitle = Template.bind({});
 CustomTitle.args = {
-  title: 'My title',
+  text: 'Asuna X',
 };
 
-export const CustomCounter = Template.bind({});
-CustomCounter.args = {
-  counter: 123456,
+export const BigSize = Template.bind({});
+BigSize.args = {
+  text: 'Asuna X',
+  size: 'big'
 };
 
-export const SlottedContent = Template.bind({});
-SlottedContent.args = {
-  slot: html`<p>Slotted content</p>`,
+export const SmallSize = Template.bind({});
+SmallSize.args = {
+  text: 'Asuna X',
+  size: 'small'
 };
-SlottedContent.argTypes = {
-  slot: { table: { disable: true } },
+
+export const Square = Template.bind({});
+Square.args = {
+  text: 'Asuna X',
+  size: 'big',
+  variant: 'square'
+};
+
+export const Image = Template.bind({});
+Image.args = {
+  text: 'Asuna X',
+  size: 'big',
+  variant: 'square',
+  image: "https://avatars.githubusercontent.com/u/86213026?s=200&v=4"
 };
