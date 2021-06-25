@@ -1,3 +1,5 @@
+/* eslint lit/attribute-value-entities: "off" */
+/* eslint import/no-extraneous-dependencies: "off" */
 import { html, TemplateResult } from 'lit-html';
 import '../r3-clip-box.js';
 
@@ -8,7 +10,7 @@ export default {
     image: { control: 'image' },
     size: { control: 'size' },
     text: { control: 'color' },
-    variant: { control: 'variant' }
+    variant: { control: 'variant' },
   },
 };
 
@@ -31,8 +33,12 @@ const Template: Story<ArgTypes> = ({
   text = 'NA',
   variant = 'solid',
 }: ArgTypes) => html`
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=VT323&display=swap" rel="stylesheet"> 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Blinker:wght@600&display=swap"
+    rel="stylesheet"
+  />
   <r3-clip-box
     image="${image}"
     size="${size}"
@@ -49,23 +55,35 @@ CustomTitle.args = {
   text: 'Asuna X',
 };
 
-export const BigSize = Template.bind({});
-BigSize.args = {
+export const SuperSmallSize = Template.bind({});
+SuperSmallSize.args = {
   text: 'Asuna X',
-  size: 'big'
+  size: 'supersmall',
 };
 
 export const SmallSize = Template.bind({});
 SmallSize.args = {
   text: 'Asuna X',
-  size: 'small'
+  size: 'small',
+};
+
+export const BigSize = Template.bind({});
+BigSize.args = {
+  text: 'Asuna X',
+  size: 'big',
+};
+
+export const SuperBigSize = Template.bind({});
+SuperBigSize.args = {
+  text: 'Asuna X',
+  size: 'superbig',
 };
 
 export const Square = Template.bind({});
 Square.args = {
   text: 'Asuna X',
   size: 'big',
-  variant: 'square'
+  variant: 'square',
 };
 
 export const Image = Template.bind({});
@@ -73,5 +91,28 @@ Image.args = {
   text: 'Asuna X',
   size: 'big',
   variant: 'square',
-  image: "https://avatars.githubusercontent.com/u/86213026?s=200&v=4"
+  image: 'https://avatars.githubusercontent.com/u/86213026?s=200&v=4',
+};
+
+export const SuperBigSizeSquareImage = Template.bind({});
+SuperBigSizeSquareImage.args = {
+  text: 'Asuna X',
+  size: 'superbig',
+  variant: 'square',
+  image: 'https://avatars.githubusercontent.com/u/86213026?s=200&v=4',
+};
+
+export const Size100Image = Template.bind({});
+Size100Image.args = {
+  text: 'Asuna X',
+  size: '100',
+  image: 'https://avatars.githubusercontent.com/u/86213026?s=200&v=4',
+};
+
+export const Size100SquareImage = Template.bind({});
+Size100SquareImage.args = {
+  text: 'Asuna X',
+  size: '100',
+  image: 'https://avatars.githubusercontent.com/u/86213026?s=200&v=4',
+  variant: 'square',
 };
