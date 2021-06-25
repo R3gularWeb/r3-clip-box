@@ -1,4 +1,5 @@
-import { html, LitElement, property } from 'lit-element';
+import {LitElement, html} from 'lit';
+import {property} from 'lit/decorators.js';
 import { colors } from './Constants';
 import style from './R3ClipBoxStyle';
 
