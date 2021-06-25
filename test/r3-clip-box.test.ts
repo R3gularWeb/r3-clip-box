@@ -4,22 +4,9 @@ import { R3ClipBox } from '../src/R3ClipBox.js';
 import { colors } from '../src/Constants.js';
 import '../r3-clip-box.js';
 
-let el: R3ClipBox;
-
-const cleanComponent = async () => {
-  el = await fixture<R3ClipBox>(html`<r3-clip-box></r3-clip-box>`);
-  await el.updateComplete;
-}
-
-const getAttribute = (attribute: string, selector: String = '#clip') =>
-  el.shadowRoot?.querySelector(`${selector}`)?.getAttribute(attribute);
-
-const getText = (selector: String) =>
-  el.shadowRoot?.querySelector(`${selector}`)?.textContent;
-
 describe('R3ClipBox', () => {
-  describe('Default value', () => {
-    cleanComponent();
+  describe('Default value', async () => {
+    const el = await fixture<R3ClipBox>(html`<r3-clip-box></r3-clip-box>`);
 
     it('Props value', () => {
       expect(el.bgColor).to.eql({});
@@ -40,7 +27,7 @@ describe('R3ClipBox', () => {
 
     describe('View component in DOM', () => {
       it('Background color', () => {
-        const background = getAttribute('style');
+        const background = el.shadowRoot?.querySelector('#clip')?.getAttribute('style');
         const color = background?.split(" ")[1];
         
         expect(colors.indexOf(
@@ -50,13 +37,13 @@ describe('R3ClipBox', () => {
       });
 
       it('Size and Variant', () => {
-        const size = getAttribute('class');
+        const size = el.shadowRoot?.querySelector('#clip')?.getAttribute('class');
         expect('medium solid').to.equal(size);
       });
 
       it('View Text and Image not displayed', () => {
-        const text  = getText('#clip label');
-        const image = getText('#clip img');
+        const text  = el.shadowRoot?.querySelector('#clip label')?.textContent;
+        const image = el.shadowRoot?.querySelector('#clip img')?.textContent;
 
         expect(text).to.equal('NA');
         assert.isUndefined(image);
@@ -66,30 +53,27 @@ describe('R3ClipBox', () => {
 
   describe('Change Properties', () => {
     
-    cleanComponent();
     it('View Image and Text not displayed', async () => {
-      el.image = 'https://avatars.githubusercontent.com/u/86213026?s=200&v=4';
-      await el.updateComplete;
-      const text  = getText('#clip label');
-      const src = getAttribute('src', '#clip img');
+      const image = 'https://avatars.githubusercontent.com/u/86213026?s=200&v=4';
+      const el = await fixture<R3ClipBox>(html`<r3-clip-box image="${image}"></r3-clip-box>`);
+  
+      const text = el.shadowRoot?.querySelector('#clip label')?.textContent;
+      const src = el.shadowRoot?.querySelector('#clip img')?.getAttribute('src');
 
       expect(el.image).to.equal(src);
       assert.isUndefined(text);
     });
 
     it('View large Text in label', async () => {
-      el.text = 'Asuna';
-      el.image = '';
-      await el.updateComplete;
-      const text  = getText('#clip label');
+      const el = await fixture<R3ClipBox>(html`<r3-clip-box text="Asuna"></r3-clip-box>`);
+      const text = el.shadowRoot?.querySelector('#clip label')?.textContent;
 
       expect(text).to.equal('AS');
     });
 
     it('View Text with space in label', async () => {
-      el.text = 'Asuna X';
-      await el.updateComplete;
-      const text  = getText('#clip label');
+      const el = await fixture<R3ClipBox>(html`<r3-clip-box text="Asuna X"></r3-clip-box>`);
+      const text = el.shadowRoot?.querySelector('#clip label')?.textContent;
 
       expect(text).to.equal('AX');
     });
